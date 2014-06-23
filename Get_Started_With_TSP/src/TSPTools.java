@@ -22,7 +22,7 @@ public class TSPTools {
     /**
      * Checks that the path is valid (contains every node exactly once), and
      * also prints the length of the path.
-     * 
+     *
      * @param arcs matrix containing the arcs of the graph
      * @param path the path to get a length for
      */
@@ -35,7 +35,7 @@ public class TSPTools {
 
     /**
      * Calculate the length of a path.
-     * 
+     *
      * @param arcs matrix containing the arcs of the graph
      * @param path the path to get a length for
      * @return the length of the path
@@ -51,7 +51,7 @@ public class TSPTools {
 
     /**
      * Check that the path contains every node exactly once.
-     * 
+     *
      * @param path the path to check
      * @return the outcome of the check
      */
@@ -71,7 +71,7 @@ public class TSPTools {
 
     /**
      * Reverses a subsection of a path.
-     * 
+     *
      * @param path the path to reverse a subsection of
      * @param reverseStart the first node of the subsection
      * @param reverseEnd the last node of the subsection
@@ -92,7 +92,7 @@ public class TSPTools {
 
     /**
      * Fill in the path with a randomized valid set of nodes.
-     * 
+     *
      * @param path this is where the result is returned.
      * @param seed the seed used to create the path, reusing the same seed
      *        results in the same path.
@@ -113,7 +113,7 @@ public class TSPTools {
     /**
      * Read a graph from a comma separated file, file should be on x,y,x,y...
      * format
-     * 
+     *
      * @param file the file containing the graph
      * @return the nodes x and y values of the graph
      */
@@ -143,7 +143,7 @@ public class TSPTools {
     /**
      * Looks for the maximum coordinate on both x and y axis, returns the max
      * value found.
-     * 
+     *
      * @param data the x,y values for al the nodes in the graph
      * @return integer for the largest x or y value found
      */
@@ -157,7 +157,7 @@ public class TSPTools {
 
     /**
      * Prints the path
-     * 
+     *
      * @param path the path to print
      */
     public static void printPath(int[] path) {
@@ -170,7 +170,7 @@ public class TSPTools {
 
     /**
      * Prints the arcs of the graph
-     * 
+     *
      * @param distanceArray
      */
     public static void printArcs(int[][] distanceArray) {
@@ -185,12 +185,13 @@ public class TSPTools {
 
     /**
      * Show a polygon in a window.
-     * 
+     *
      * @param p the polygon to display
      * @param windowSize the size of the window
+     * @param windowName name of the window
      */
-    public static void createAndShowGUI(Polygon p, int windowSize) {
-        JFrame f = new JFrame("TSP path viewer");
+    public static void createAndShowGUI(Polygon p, int windowSize, String windowName) {
+        JFrame f = new JFrame(windowName);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(windowSize, windowSize);
         f.add(new MyPanel(p, windowSize));
@@ -200,7 +201,7 @@ public class TSPTools {
 
     /**
      * Build a polygon for plotting the path on the screen
-     * 
+     *
      * @param nodeData x,y,x,y... data of the graph
      * @param path the path to plot
      * @param windowSize size of the window to plot in
@@ -223,9 +224,9 @@ public class TSPTools {
     }
 
     /**
-     * 
+     *
      * Write the path to file
-     * 
+     *
      * @param path the path to write to file
      * @param rndSeed the seed used to create the path
      * @param string file name
