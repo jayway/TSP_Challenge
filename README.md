@@ -1,15 +1,14 @@
 Jayways TSP challenge
 ==========
 
-The goal is simple, claim the shortest path on as many of the graphs as possible. The graphs can be found in this repo in the /nodegen folder, and are named xxx_locations.csv where the xxx stands for how many nodes the graph contains.
+The goal is simple, claim the shortest path on as many of the graphs as possible. The graphs can be found in this repo in the /graphs folder, and are named x_locations.csv where the x is the number of nodes that the graph contains.
 
-There are a few java classes to help get you started:
+There are a few java classes to help get you started in this folder:
+https://github.com/jayway/TSP_Challenge/tree/master/Get_Started_With_TSP
 
------ link to get started
+If you compile and run Get_Started_With_TSP/src/TSPSolver.java you will get a first ideea of what a bad path can look like.
 
-Using those you get reading and writing files for free as well as drawing of you path to screen to see whats going on. Compile and run TSPSolver.java to get a first ideea of what a bad path can look like.
-
-Claiming a sortest path is done by committing a cvs file to the repo with the path, and then updating the xsl document found here:
+Claiming a sortest path is done updating the xsl document found here:
 https://docs.google.com/a/jayway.com/spreadsheets/d/1FKiWK7U9_lhbQ61fsw42Ntf4AJW-zMeol0CRPYWNDjg/edit#gid=0 
 
 Happy coding!
