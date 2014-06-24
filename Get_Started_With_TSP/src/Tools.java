@@ -269,10 +269,10 @@ public class Tools {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy h:mm:ss a");
         StringBuffer data = new StringBuffer();
-        data.append("Time: ");
+        data.append("# Time: ");
         data.append(sdf.format(date));
         data.append("\n");
-        data.append("Seed: ");
+        data.append("# Seed: ");
         data.append(rndSeed);
         data.append("\n");
         for (int i = 0; i < path.length; i++) {
