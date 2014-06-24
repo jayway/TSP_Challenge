@@ -17,7 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class TSPTools {
+public class Tools {
 
     /**
      * Checks that the path is valid (contains every node exactly once), and
@@ -27,10 +27,13 @@ public class TSPTools {
      * @param path the path to get a length for
      */
     public static void checkPath(double[][] arcs, int[] path) {
-        double length = TSPTools.getPathLength(arcs, path);
-        boolean valid = TSPTools.isPathValid(path);
+        double length = Tools.getPathLength(arcs, path);
+        boolean valid = Tools.isPathValid(path);
+        if (path.length != arcs[0].length) {
+            valid = false;
+        }
         System.out.println("This TSP path is " + length + " km long and is " + (valid ? "valid" : "invalid") + ".");
-        TSPTools.printPath(path);
+        Tools.printPath(path);
     }
 
     /**
@@ -95,7 +98,7 @@ public class TSPTools {
      *
      * @param path this is where the result is returned.
      * @param seed the seed used to create the path, reusing the same seed
-     *        results in the same path.
+     *            results in the same path.
      */
     public static void getRandomizedStartPath(int[] path, long seed) {
         Random rnd = new Random(seed);
@@ -132,7 +135,39 @@ public class TSPTools {
 
         for (int i = 0; i < split.length; i++) {
             try {
-                results[i] = Integer.parseInt(split[i]);
+                results[i] = Integer.parseInt(split[i].trim());
+            } catch (NumberFormatException nfe) {
+                nfe.printStackTrace();
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Read a graph from a comma separated file, file should be on x,y,x,y...
+     * format
+     *
+     * @param file the file containing the graph
+     * @return the nodes x and y values of the graph
+     */
+    public static int[] readPathFromCVSFile(String file) {
+        BufferedReader br = null;
+        String line = "#";
+        try {
+            br = new BufferedReader(new FileReader(file));
+            while (line.startsWith("#")) {
+                line = br.readLine();
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String[] split = line.split(",");
+        int[] results = new int[split.length];
+
+        for (int i = 0; i < split.length; i++) {
+            try {
+                results[i] = Integer.parseInt(split[i].trim());
             } catch (NumberFormatException nfe) {
                 nfe.printStackTrace();
             }
@@ -224,7 +259,6 @@ public class TSPTools {
     }
 
     /**
-     *
      * Write the path to file
      *
      * @param path the path to write to file
@@ -258,7 +292,9 @@ public class TSPTools {
 
     private static class MyPanel extends JPanel {
         private static final long serialVersionUID = 1L;
+
         private Polygon p = null;
+
         private int windowSize = 100;
 
         public MyPanel(Polygon p, int windowSize) {

@@ -1,6 +1,6 @@
 import javax.swing.SwingUtilities;
 
-public class TSPSolver {
+public class Solver {
 
     // Size of the window where we draw the resulting path
     private final static int WINDOW_SIZE = 500;
@@ -11,7 +11,7 @@ public class TSPSolver {
     public static void main(String[] args) {
 
         // Read the x and y values for all nodes from a csv file.
-        final int[] data = TSPTools.readGraphFromCVSFile("../graphs/10_locations.csv");
+        final int[] data = Tools.readGraphFromCVSFile("../graphs/10_locations.csv");
 
         // How long should the path be / how many nodes are we dealing with.
         final int size = data.length / 2;
@@ -26,7 +26,7 @@ public class TSPSolver {
         rndSeed = 1;
 
         // create a random path
-        TSPTools.getRandomizedStartPath(path, rndSeed);
+        Tools.getRandomizedStartPath(path, rndSeed);
 
         // TODO improve the path !!!
         // This is where YOU improve the path, please use the TSPTools where
@@ -36,17 +36,17 @@ public class TSPSolver {
 
         // Validate that the path is valid (contains all nodes exactly once),
         // and print the length of it.
-        TSPTools.checkPath(arcs, path);
+        Tools.checkPath(arcs, path);
 
         // Save the path to file, named after the input and length
-        TSPTools.savePathToFile(path, rndSeed, "result_" + size + "_" + TSPTools.getPathLength(arcs, path) + ".csv");
+        Tools.savePathToFile(path, rndSeed, "result_" + size + "_" + Tools.getPathLength(arcs, path) + ".csv");
 
         // Show the resulting path in a window, useful for debugging and
-        // improving the optimising algorithms.
+        // improving the optimizing algorithms.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                TSPTools.createAndShowGUI(TSPTools.getPolygonForPlotting(data, path, WINDOW_SIZE), WINDOW_SIZE, "TSP path, nodes: "
-                        + size + ", length: " + TSPTools.getPathLength(arcs, path));
+                Tools.createAndShowGUI(Tools.getPolygonForPlotting(data, path, WINDOW_SIZE), WINDOW_SIZE, "TSP path, nodes: "
+                        + size + ", length: " + Tools.getPathLength(arcs, path));
             }
         });
     }
