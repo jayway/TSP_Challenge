@@ -162,12 +162,14 @@ public class Tools {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        line = line.replaceAll("[^\\d]+$", "").replaceAll("^[^\\d]+", "");
         String[] split = line.split(",");
         int[] results = new int[split.length];
 
         for (int i = 0; i < split.length; i++) {
             try {
-                results[i] = Integer.parseInt(split[i].trim());
+                String digit =split[i].trim();
+                results[i] = Integer.parseInt(digit );
             } catch (NumberFormatException nfe) {
                 nfe.printStackTrace();
             }
