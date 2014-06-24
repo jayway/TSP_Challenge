@@ -79,7 +79,7 @@ public class Tools {
      * @param reverseStart the first node of the subsection
      * @param reverseEnd the last node of the subsection
      */
-    public static void reversSubSectionOfArray(int[] path, int reverseStart, int reverseEnd) {
+    public static void reverseSubSectionOfArray(int[] path, int reverseStart, int reverseEnd) {
         if (reverseEnd < reverseStart) {
             int t = reverseEnd;
             reverseEnd = reverseStart;
