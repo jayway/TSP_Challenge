@@ -252,12 +252,12 @@ public class TSPTools {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     private static class MyPanel extends JPanel {
+        private static final long serialVersionUID = 1L;
         private Polygon p = null;
         private int windowSize = 100;
 
