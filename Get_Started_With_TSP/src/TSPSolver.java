@@ -4,12 +4,13 @@ public class TSPSolver {
 
     // Size of the window where we draw the resulting path
     private final static int WINDOW_SIZE = 500;
+
     // used for generating a randomized path through the graph
     private static long rndSeed;
 
     public static void main(String[] args) {
 
-        // Read the x and y values for al nodes from a csv file.
+        // Read the x and y values for all nodes from a csv file.
         final int[] data = TSPTools.readGraphFromCVSFile("../graphs/10_locations.csv");
 
         // How long should the path be / how many nodes are we dealing with.
@@ -22,7 +23,7 @@ public class TSPSolver {
         final int[] path = new int[size];
 
         // Seed for creating a random path
-        rndSeed = System.currentTimeMillis();
+        rndSeed = 1;
 
         // create a random path
         TSPTools.getRandomizedStartPath(path, rndSeed);
@@ -38,15 +39,14 @@ public class TSPSolver {
         TSPTools.checkPath(arcs, path);
 
         // Save the path to file, named after the input and length
-        TSPTools.savePathToFile(path, rndSeed,
-                "result_" + size + "_" + TSPTools.getPathLength(arcs, path) + ".csv");
+        TSPTools.savePathToFile(path, rndSeed, "result_" + size + "_" + TSPTools.getPathLength(arcs, path) + ".csv");
 
         // Show the resulting path in a window, useful for debugging and
         // improving the optimising algorithms.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                TSPTools.createAndShowGUI(TSPTools.getPolygonForPlotting(data, path, WINDOW_SIZE), WINDOW_SIZE,
-                        "TSP path, number of nodes: " + size + ", length: " + TSPTools.getPathLength(arcs, path));
+                TSPTools.createAndShowGUI(TSPTools.getPolygonForPlotting(data, path, WINDOW_SIZE), WINDOW_SIZE, "TSP path, nodes: "
+                        + size + ", length: " + TSPTools.getPathLength(arcs, path));
             }
         });
     }
