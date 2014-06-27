@@ -93,6 +93,28 @@ public class Tools {
         }
     }
 
+    public static void moveNodeFromAToB(int[] path, int a, int b) {
+        if (a < b) {
+            int node = path[a];
+            for (int j = a; j < b; j++) {
+                path[j] = path[j + 1];
+            }
+            path[b] = node;
+        } else if (a > b) {
+            int node = path[a];
+            for (int j = a; j > b + 1; j--) {
+                path[j] = path[j - 1];
+            }
+            path[b + 1] = node;
+
+        }
+    }
+
+    public static void moveCluster(int[] path, int clusterStart, int clusterEnd, int move) {
+        // TODO Auto-generated method stub
+
+    }
+
     /**
      * Fill in the path with a randomized valid set of nodes.
      *
