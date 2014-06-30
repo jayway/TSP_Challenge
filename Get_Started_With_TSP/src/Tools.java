@@ -141,6 +141,20 @@ public class Tools {
     }
 
     /**
+     * @param path
+     * @param clusterStart
+     * @param clusterEnd
+     * @param steps
+     */
+    public static void rotateCluster(ArrayList<Integer> path, int clusterStart, int clusterEnd, int steps) {
+        List<Integer> c = new ArrayList<Integer>();
+        c.addAll(path.subList(clusterEnd - steps, clusterEnd));
+        c.addAll(path.subList(clusterStart, clusterEnd - steps));
+        path.removeAll(c);
+        path.addAll(clusterStart, c);
+    }
+
+    /**
      * Fill in the path with a randomized valid set of nodes.
      *
      * @param path this is where the result is returned.
