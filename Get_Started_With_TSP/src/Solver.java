@@ -45,7 +45,7 @@ public class Solver {
         // improving the optimizing algorithms.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                Tools.createAndShowGUI(Tools.getPolygonForPlotting(data, path, WINDOW_SIZE), WINDOW_SIZE, "TSP path, nodes: "
+                Tools.createAndShowGUI(Tools.getPolygonForPlotting(data, path, WINDOW_SIZE), path, WINDOW_SIZE, "TSP path, nodes: "
                         + size + ", length: " + Tools.getPathLength(arcs, path));
             }
         });

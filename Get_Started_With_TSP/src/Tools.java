@@ -93,6 +93,13 @@ public class Tools {
         }
     }
 
+    /**
+     * Move a node from position A to B on the path.
+     *
+     * @param path the path.
+     * @param a position to move node from on the path
+     * @param b position to move node to on the path
+     */
     public static void moveNodeFromAToB(int[] path, int a, int b) {
         if (a < b) {
             int node = path[a];
@@ -110,9 +117,27 @@ public class Tools {
         }
     }
 
-    public static void moveCluster(int[] path, int clusterStart, int clusterEnd, int move) {
-        // TODO Auto-generated method stub
-
+    /**
+     * Move part of the path a distance along the path
+     *
+     * @param path
+     * @param clusterStart
+     * @param clusterEnd
+     * @param distance
+     */
+    public static void moveCluster(List<Integer> path, int clusterStart, int clusterEnd, int distance) {
+        List<Integer> c = path.subList(clusterStart, clusterEnd);
+        System.out.println("cluster " + c.size());
+        for (int i : c) {
+            System.out.print(", " + i);
+        }
+        System.out.println();
+        List<Integer> p = new ArrayList<Integer>();
+        p.addAll(path.subList(0, clusterStart));
+        p.addAll(path.subList(clusterEnd, path.size()));
+        p.addAll(clusterStart + distance, c);
+        path.clear();
+        path.addAll(p);
     }
 
     /**
@@ -190,8 +215,8 @@ public class Tools {
 
         for (int i = 0; i < split.length; i++) {
             try {
-                String digit =split[i].trim();
-                results[i] = Integer.parseInt(digit );
+                String digit = split[i].trim();
+                results[i] = Integer.parseInt(digit);
             } catch (NumberFormatException nfe) {
                 nfe.printStackTrace();
             }
@@ -245,15 +270,15 @@ public class Tools {
     /**
      * Show a polygon in a window.
      *
-     * @param p the polygon to display
+     * @param polygon the polygon to display
      * @param windowSize the size of the window
      * @param windowName name of the window
      */
-    public static void createAndShowGUI(Polygon p, int windowSize, String windowName) {
+    public static void createAndShowGUI(Polygon polygon, int[] path, int windowSize, String windowName) {
         JFrame f = new JFrame(windowName);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(windowSize, windowSize);
-        f.add(new MyPanel(p, windowSize));
+        f.add(new MyPanel(polygon, path, windowSize));
         f.pack();
         f.setVisible(true);
     }
@@ -278,6 +303,8 @@ public class Tools {
         for (int a = 0; a < path.length; a++) {
             p.addPoint((int) (nodeData[2 * path[a]] * scale) + padding / 2, //
                     (int) (nodeData[2 * path[a] + 1] * scale) + padding / 2);
+            // System.out.println("x: " + (int) (nodeData[2 * path[a]] * scale)
+            // + " y: " + (int) (nodeData[2 * path[a] + 1] * scale));
         }
         return p;
     }
@@ -317,13 +344,16 @@ public class Tools {
     private static class MyPanel extends JPanel {
         private static final long serialVersionUID = 1L;
 
-        private Polygon p = null;
+        private Polygon polygon = null;
+
+        private int[] path;
 
         private int windowSize = 100;
 
-        public MyPanel(Polygon p, int windowSize) {
+        public MyPanel(Polygon polygon, int[] path, int windowSize) {
             setBorder(BorderFactory.createLineBorder(Color.black));
-            this.p = p;
+            this.polygon = polygon;
+            this.path = path;
             this.windowSize = windowSize;
         }
 
@@ -335,17 +365,21 @@ public class Tools {
             super.paintComponent(g);
 
             // Draw the path/polygon
-            g.drawPolygon(p);
+            g.drawPolygon(polygon);
 
             int width = 3;
             int height = 3;
             // Draw the points with small squares
-            for (int i = 0; i < p.npoints; i++) {
-                g.drawRect(p.xpoints[i] - width / 2, p.ypoints[i] - height / 2, width, height);
+            for (int i = 0; i < polygon.npoints; i++) {
+                int x = polygon.xpoints[i] - width / 2;
+                int y = polygon.ypoints[i] - height / 2;
+                g.drawRect(x, y, width, height);
+                g.drawString(path[i] + "", x - 6, y + 16);
             }
 
             // Draw first/last point in path larger
-            g.drawRect(p.xpoints[0] - width * 2, p.ypoints[0] - height * 2, width * 4, height * 4);
+            g.drawRect(polygon.xpoints[0] - width * 2, polygon.ypoints[0] - height * 2, width * 4, height * 4);
+
         }
     }
 }
