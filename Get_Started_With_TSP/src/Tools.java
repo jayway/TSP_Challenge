@@ -254,6 +254,16 @@ public class Tools {
     }
 
     /**
+     * Rotates a List based path one step to the left.
+     *
+     * @param apath the path.
+     */
+    public static void rotatePathOneStepLeft(final ArrayList<Integer> apath) {
+        apath.add(apath.get(0));
+        apath.remove(0);
+    }
+
+    /**
      * Prints the path
      *
      * @param path the path to print
@@ -262,6 +272,19 @@ public class Tools {
         System.out.print("Path: ");
         for (int i = 0; i < path.length; i++) {
             System.out.print(path[i] + ", ");
+        }
+        System.out.println();
+    }
+
+    /**
+     * Prints the path
+     *
+     * @param path the path to print
+     */
+    public static void printPath(final ArrayList<Integer> path) {
+        System.out.print("Path: ");
+        for (int i = 0; i < path.size(); i++) {
+            System.out.print(path.get(i) + ", ");
         }
         System.out.println();
     }
