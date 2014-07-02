@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -154,6 +153,15 @@ public class Tools {
         path.addAll(clusterStart, c);
     }
 
+    public static void reverseCluster(ArrayList<Integer> path, int reverseStart, int reverseEnd) {
+       List<Integer> cluster = new ArrayList<Integer>();
+       List<Integer> tmp = path.subList(reverseStart, reverseEnd);
+       cluster.addAll(tmp);
+       Collections.reverse(cluster);
+       path.removeAll(cluster);
+       path.addAll(reverseStart, cluster);
+    }
+
     /**
      * Fill in the path with a randomized valid set of nodes.
      *
@@ -281,7 +289,7 @@ public class Tools {
      *
      * @param path the path to print
      */
-    public static void printPath(final ArrayList<Integer> path) {
+    public static void printPath(final List<Integer> path) {
         System.out.print("Path: ");
         for (int i = 0; i < path.size(); i++) {
             System.out.print(path.get(i) + ", ");
